@@ -18,6 +18,7 @@ int curStep;
 int curChannel;
 bool stepActive[CHANNELS][MAX_STEPS];
 int stepCV[CHANNELS][MAX_STEPS];
+int CVRange[CHANNELS];
 
 
 
@@ -34,6 +35,7 @@ Noside_Sequencer::Noside_Sequencer() {
 		for (int j = 0; j < MAX_STEPS; j++) {
 			stepActive[i][j] = false;
 			stepCV[i][j] = 2048;
+			channelCVRange[i] = 16;
 		}
 	}
 }
@@ -155,6 +157,27 @@ int Noside_Sequencer::getStepCV(int channel, int stepInd) {
 
 int Noside_Sequencer::getCurStepCV(int channel) {
 	return stepCV[channel - 1][curStep-1];
+}
+
+void Noside_Sequencer::setCVRange(int channel, int range) {
+	if (channel > CHANNELS) {
+		return;
+	}
+	if (channel < 1) {
+		return;
+	}
+
+	if (range > 16) {
+		return;
+	}	
+	if (range < 0) {
+		return;
+	}
+	CVRange[channel] = range;
+}
+
+int Noside_Sequencer::getCVRange(int channel) {
+	return CVRange[channel];
 }
 
 // void Sequencer::printStepCV() {

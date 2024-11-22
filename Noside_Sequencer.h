@@ -30,6 +30,10 @@ public:
 	int getStepCV(int channel, int stepInd);
 
 	int getCurStepCV(int channel);
+
+	void setCVRange(int channel, int range);
+
+	int getCVRange(int channel);
 	
 	void printStepCV();
 
@@ -40,6 +44,7 @@ private:
 	int curChannel;
 	bool stepActive[CHANNELS][MAX_STEPS];
 	int stepCV[CHANNELS][MAX_STEPS];
+	int channelCVRange[CHANNELS];
 };
 
 
